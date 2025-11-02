@@ -1,4 +1,24 @@
-import { pgTable, pgEnum, varchar, timestamp, json, uuid, boolean } from 'drizzle-orm/pg-core';
+import { pgTable, pgEnum, varchar, timestamp, json, uuid, boolean, integer } from 'drizzle-orm/pg-core';
+
+
+// User
+
+export const userDB = pgTable('User', {
+  id: uuid('id').primaryKey().notNull().defaultRandom(),
+  firstName: varchar('firstName').notNull(),
+  lastName: varchar('lastName'),
+  email: varchar('email').notNull(),
+  password: varchar('password'),
+  phone: varchar('phone'),
+  avatar: varchar('avatar'),
+  isActive: boolean('isActive').default(true),
+  isVerified: boolean('isVerified').notNull().default(false),
+  googleId: varchar('googleId'),
+  lastLoginAt: timestamp('lastLoginAt'),
+  lastLoginIP: json('lastLoginIP'),
+  createdAt: timestamp('createdAt').defaultNow(),
+  updatedAt: timestamp('updatedAt')
+});
 
 
 // Verification
@@ -25,21 +45,13 @@ export const tokenDB = pgTable('Token', {
 });
 
 
-// User
+// Upload
 
-export const userDB = pgTable('User', {
+export const uploadDB = pgTable('Upload', {
   id: uuid('id').primaryKey().notNull().defaultRandom(),
-  firstName: varchar('firstName').notNull(),
-  lastName: varchar('lastName'),
-  email: varchar('email').notNull(),
-  password: varchar('password'),
-  phone: varchar('phone'),
-  avatar: varchar('avatar'),
-  isActive: boolean('isActive').default(true),
-  isVerified: boolean('isVerified').notNull().default(false),
-  googleId: varchar('googleId'),
-  lastLoginAt: timestamp('lastLoginAt'),
-  lastLoginIP: json('lastLoginIP'),
+  fileName: varchar('fileName'),
+  userId: uuid('userId'),
+  mimeType: varchar('mimeType'),
+  fileSize: integer('fileSize'),
   createdAt: timestamp('createdAt').defaultNow(),
-  updatedAt: timestamp('updatedAt')
 });
