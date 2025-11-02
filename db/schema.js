@@ -5,7 +5,7 @@ import { pgTable, pgEnum, varchar, timestamp, json, uuid, boolean } from 'drizzl
 
 export const verificationTypeEnum = pgEnum('verificationType', ['register', 'password']);
 
-export const verification = pgTable('Verification', {
+export const verificationDB = pgTable('Verification', {
   id: uuid('id').primaryKey().notNull().defaultRandom(),
   email: varchar('email'),
   phone: varchar('phone'),
@@ -18,7 +18,7 @@ export const verification = pgTable('Verification', {
 
 // Token
 
-export const token = pgTable('Token', {
+export const tokenDB = pgTable('Token', {
   id: uuid('id').primaryKey().notNull().defaultRandom(),
   token: varchar('token'),
   createdAt: timestamp('createdAt').defaultNow(),
@@ -27,11 +27,11 @@ export const token = pgTable('Token', {
 
 // User
 
-export const user = pgTable('User', {
+export const userDB = pgTable('User', {
   id: uuid('id').primaryKey().notNull().defaultRandom(),
-  firstName: varchar('firstName'),
+  firstName: varchar('firstName').notNull(),
   lastName: varchar('lastName'),
-  email: varchar('email'),
+  email: varchar('email').notNull(),
   password: varchar('password'),
   phone: varchar('phone'),
   avatar: varchar('avatar'),

@@ -23,8 +23,6 @@ const corsOptions = {
     } else {
       callback(new Error('CORS алдаа гарлаа'));
     }
-
-    callback(null, true);
   },
   credentials: true
 }
