@@ -41,7 +41,7 @@ const optimizeFile = async (fileBuffer, mimeType) => {
     } else if (mimeType === 'image/gif') {
       optimizedBuffer = await sharp(fileBuffer).gif({ quality: 75 }).resize({ width: 1200 }).withMetadata().toBuffer()
     } else if (mimeType === 'image/heif') {
-      optimizedBuffer = await sharp(fileBuffer).heif({ quality: 75 }).resize({ width: 1200 }).withMetadata().toBuffer()
+      optimizedBuffer = await sharp(fileBuffer).jpeg({ quality: 75, mozjpeg: true }).resize({ width: 1200 }).withMetadata().toBuffer()
     } else if (mimeType === 'image/heic') {
       optimizedBuffer = await convertHeicBufferToJpg(fileBuffer)
     }

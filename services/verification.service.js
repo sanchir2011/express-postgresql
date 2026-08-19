@@ -17,7 +17,7 @@ export async function createVerification({ email, phone, type = 'register', skip
       if(existingVerification) {
         if(moment().isBefore(moment(existingVerification.createdAt).add(1, 'minutes'))) return { error: 'Хэсэг хугацааны дараа дахин илгээнэ үү' }
       }
-      await db.delete(verificationDB).where(eq(verificationDB.email, email), eq(verificationDB.type, type))
+      await db.delete(verificationDB).where(and(eq(verificationDB.email, email), eq(verificationDB.type, type)))
     }
     if(phone) {
       newData.phone = validPhoneNumber.parse(phone)
@@ -25,7 +25,7 @@ export async function createVerification({ email, phone, type = 'register', skip
       if(existingVerification) {
         if(moment().isBefore(moment(existingVerification.createdAt).add(1, 'minutes'))) return { error: 'Хэсэг хугацааны дараа дахин илгээнэ үү' }
       }
-      await db.delete(verificationDB).where(eq(verificationDB.phone, phone), eq(verificationDB.type, type))
+      await db.delete(verificationDB).where(and(eq(verificationDB.phone, phone), eq(verificationDB.type, type)))
     }
     newData.type = validVerificationType.parse(type)
     if(!email && !phone) return { error: 'Имэйл эсвэл утасны дугаар хоосон байна' }
