@@ -69,5 +69,9 @@
     "@esbuild-kit/core-utils": {
       "esbuild": "^0.25.12"
     }
+  },
+  "allowScripts": {
+    "fsevents@2.3.3": true,
+    "esbuild@0.28.2": true
   }
 }
